@@ -1,11 +1,11 @@
-function ComputeROC(Cparams,FData,NFData)
+function ComputeROC(Cparams,FData,NFData,m,n)
 
 global tprThresh;
 
 N = 1000;
 
-TestFIms = setdiff(LoadAllIntegrals(FData.DirName),FData.ii_ims,'rows');
-TestNFIms = setdiff(LoadAllIntegrals(NFData.DirName),NFData.ii_ims,'rows');
+TestFIms = FData.ii_ims(n+1:end,:);
+TestNFIms = NFData.ii_ims(m+1:end,:);
 
 scF = ApplyDetector(Cparams,TestFIms);
 scNF = ApplyDetector(Cparams,TestNFIms);

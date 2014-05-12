@@ -5,6 +5,7 @@ global W H SanityCheck ii_im im;
 face_fnames = dir([DirName,'/*.bmp']);
 aa = 1:length(face_fnames);
 a = randperm(length(aa));
+ni = size(a,2);
 fnums = aa(a(1:ni));
 
 for i=1:ni
