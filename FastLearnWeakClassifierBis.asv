@@ -1,9 +1,7 @@
-function [theta,p,err] = FastLearnWeakClassifier(ws,ys,zc,muc,varc1,varc2,fs,feature)
+function [theta,p,err] = FastLearnWeakClassifierBis(ws,ys,zc,mu,varc1,varc2,fs,feature,j)
 
 
 n = size(fs,1);
-
-mu = muc*feature;
 
 var1 = feature'*varc1*feature;
 var2 = feature'*varc2*feature;

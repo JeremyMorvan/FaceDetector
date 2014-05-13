@@ -36,17 +36,16 @@ var2 = 0;
 %%
 %%%%%%%%%Boosting Alg (50000)
 
-dinfo6 = load('DebugInfo/debuginfo6.mat');
 FTData = load('FeaturesToUse.mat');
 NFData = load('NonFaceData.mat');
 FData = load('FaceData.mat');
-T = dinfo6.T;
-Cparams1 = FastBoostingAlg(FData, NFData, FTData, T);
-Cparams = BoostingAlg(FData, NFData, FTData, T);
+T = 2;
+Cparams1 = FastBoostingAlgBis(FData, NFData, FTData, T,5000,3000);
+Cparams = FastBoostingAlg(FData, NFData, FTData, T,5000,3000);
 
 
-% %%
-% %%%%%%%%%Boosting Alg II
+%%
+%%%%%%%%%Boosting Alg II
 % 
 % dinfo7 = load('DebugInfo/debuginfo7.mat');
 % FTData = load('FeaturesToUse.mat');
@@ -57,7 +56,8 @@ Cparams = BoostingAlg(FData, NFData, FTData, T);
 % b1 = sum(abs(dinfo7.alphas - Cparams.alphas))>eps
 % b2 = sum(abs(dinfo7.Thetas(:) - Cparams.Thetas(:)))>eps
 % save('Cparams','Cparams');
-% c_pic = MakeClassifierPic(Cparams.all_ftypes,Cparams.Thetas(:,1)',Cparams.alphas',Cparams.Thetas(:,3)',FTData.W,FTData.H);
+% load('Cparams');
+% c_pic = MakeClassifierPic(Cparams.all_ftypes,Cparams.Thetas(:,1)',Cparams.alphas',Cparams.Thetas(:,3)',19,19);
 % imagesc(-c_pic);
 % colormap(gray);
 

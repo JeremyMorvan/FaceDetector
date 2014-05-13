@@ -9,19 +9,19 @@ rho = 0.8;
 %%
 %%%%%%%Scan Image Fixed Size
 
-load('Cparams');
-imName = 'TestImages/one_chris.png';
-if SanityCheck
-    imName = 'TrainingImages/FACES/face00001.bmp';
-end
-im = double(imread(imName));
-dets = ScanImageFixedSize(Cparams, im);
-DisplayDetections(imName,PruneDetections(dets));
+% load('Cparams');
+% imName = 'TestImages/one_chris.png';
+% if SanityCheck
+%     imName = 'TrainingImages/FACES/face00001.bmp';
+% end
+% im = double(imread(imName));
+% dets = ScanImageFixedSize(Cparams, im);
+% DisplayDetections(imName,PruneDetections(dets));
 
 %%
 %%%%%%%Scan Image Over Scale
 
-load('CparamsBasic');
+load('Cparams');
 imName = 'TestImages/big_many_faces.jpg';
 if SanityCheck
     imName = 'TrainingImages/FACES/face00001.bmp';
