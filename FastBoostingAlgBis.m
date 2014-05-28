@@ -12,13 +12,15 @@ muc = zeros(2,size(ii_ims,2));
 fmat = FTData.fmat;
 fs = ii_ims*FTData.fmat;
 d = size(fs,2);
-fsrep = [fs,-fs,fs,-fs];
-yrep = y(:,ones(1,4*d));
-T1 = zeros(1,d);
-T2 = zeros(1,d);
+fs = fs(:,1:d);
+% fsrep = [fs,-fs,fs,-fs];
+% yrep = y(:,ones(1,4*d));
+% T1 = zeros(1,d);
+% T2 = zeros(1,d);
 
 for t=1:T
     w = w/sum(w);
+    errMin = realmax;
     zc = [sum(w(m+1:end,1));sum(w(1:m,1))];
     [varc1,muc(1,:)] = wcov(FData.ii_ims(1:n,:),w(m+1:end,1));
     [varc2,muc(2,:)] = wcov(NFData.ii_ims(1:m,:),w(1:m,1));
@@ -28,18 +30,24 @@ for t=1:T
     for j=1:d
         var1 = fmat(:,j)'*varg1(:,j);
         var2 = fmat(:,j)'*varg2(:,j);
-        [t1,t2] = FastLearnWeakClassifierBis(zc,mu(:,j),var1,var2);
-        T1(1,j) = t1;
-        T2(1,j) = t2;
+        [theta,p,err] = FastLearnWeakClassifierBis(zc,y,w,mu(:,j),var1,var2,fs(:,j));
+%         T1(1,j) = t1;
+%         T2(1,j) = t2;
+        if err<errMin
+            errMin = err;
+            thetas(t,2) = theta;
+            thetas(t,1) = j;
+            thetas(t,3) = p;
+        end
     end
-    Tmat = [T1,-T1,T2,-T2];
-    Tmatfin = Tmat(ones(1,m+n),:);    
-    errs = w'*abs(yrep-(fsrep<Tmatfin));    
-    [errMin,index] = min(errs);
-    thetas(t,1) = mod(index-1,d)+1;
-    r = (index-thetas(t,1))/d;
-    thetas(t,3) = (-1)^r;
-    thetas(t,2) = thetas(t,3)*Tmat(1,index);
+%     Tmat = [T1,-T1,T2,-T2];
+%     Tmatfin = Tmat(ones(1,m+n),:);    
+%     errs = w'*abs(yrep-(fsrep<Tmatfin));    
+%     [errMin,index] = min(errs);
+%     thetas(t,1) = mod(index-1,d)+1;
+%     r = (index-thetas(t,1))/d;
+%     thetas(t,3) = (-1)^r;
+%     thetas(t,2) = thetas(t,3)*Tmat(1,index);
     betas(t,1) = errMin/(1-errMin);
     w = w.*betas(t,1).^(1-abs(y-(thetas(t,3)*fs(:,thetas(t,1))<thetas(t,3)*thetas(t,2))));
 end

@@ -39,9 +39,9 @@ var2 = 0;
 FTData = load('FeaturesToUse.mat');
 NFData = load('NonFaceData.mat');
 FData = load('FaceData.mat');
-T = 2;
+T = 1;
 Cparams1 = FastBoostingAlgBis(FData, NFData, FTData, T,5000,3000);
-Cparams = FastBoostingAlg(FData, NFData, FTData, T,5000,3000);
+% Cparams = FastBoostingAlg(FData, NFData, FTData, T,5000,3000);
 
 
 %%
