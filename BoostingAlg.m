@@ -10,7 +10,7 @@ m = size(NFData.ii_ims,1);
 
 w = [(1/(2*m)).*ones(m,1);(1/(2*n)).*ones(n,1)];
 y = [zeros(m,1);ones(n,1)];
-fs = [NFData.ii_ims;FData.ii_ims]*FTData.fmat(:,1:50000);
+fs = [NFData.ii_ims;FData.ii_ims]*FTData.fmat;
 
 for t=1:T
     w = w/sum(w);

@@ -15,9 +15,9 @@ thresholds = linspace(min(min(scF),min(scNF)),max(max(scF),max(scNF)),N)';
 plot(fpr,tpr,'r');
 hold on
 
-[dummy,index] = min(abs(tpr-tprThresh));
-Cparams.thresh = thresholds(index,1);
-save('Cparams','Cparams');
+% [dummy,index] = min(abs(tpr-tprThresh));
+% Cparams.thresh = thresholds(index,1);
+% save('Cparams','Cparams');
 plot(fpr(index),tpr(index),'bo');
 
 end

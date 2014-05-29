@@ -16,10 +16,10 @@ var2 = 0;
 % %%
 % %%%%%%%%%Simple Weak Classifier
 % 
-% FTData = load('FeaturesToUse.mat');
-% feature = FTData.fmat(:,12026);
-% 
-% [theta,p,err] = TrainAndPlot(feature);
+FTData = load('FeaturesToUse.mat');
+feature = FTData.fmat(:,12026);
+
+[theta,p,err] = TrainAndPlot(feature);
 % 
 % 
 % %%
@@ -43,12 +43,12 @@ var2 = 0;
 FTData = load('FeaturesToUse.mat');
 NFData = load('NonFaceData.mat');
 FData = load('FaceData.mat');
-T = 1;
+T = 200;
 Cparams1 = FastBoostingAlgBis(FData, NFData, FTData, T,5000,3000);
-% c_pic = MakeClassifierPic(Cparams1.all_ftypes,Cparams1.Thetas(:,1)',Cparams1.alphas',Cparams1.Thetas(:,3)',19,19);
-% imagesc(-c_pic);
-% colormap(gray);
-% ComputeROC(Cparams1,FData,NFData,5000,3000);
+c_pic = MakeClassifierPic(Cparams1.all_ftypes,Cparams1.Thetas(:,1)',Cparams1.alphas',Cparams1.Thetas(:,3)',19,19);
+imagesc(-c_pic);
+colormap(gray);
+ComputeROC(Cparams1,FData,NFData,5000,3000);
 
 
 %%

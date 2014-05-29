@@ -22,6 +22,10 @@ delete(Yf(1));
 
 plot([theta theta],ylim,'-');
 
+[theta,p,err] = LearnWeakClassifierBefore(ws,fs,ys);
+
+plot([theta theta],ylim,'-');
+
 
 end
 
